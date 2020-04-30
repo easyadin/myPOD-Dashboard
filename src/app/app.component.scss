@@ -12,8 +12,6 @@ $base-bgcolor :#22233C;
     background-color: $base-bgcolor;
   }
   
-
-  
   .example-sidenav-container {
     /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
        causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
@@ -26,12 +24,13 @@ $base-bgcolor :#22233C;
        `<body>` to be our scrolling element for mobile layouts. */
     flex: 1 0 auto;
     background-color: $base-bgcolor;
+    max-width: 100%;
   }
   
   .example-is-mobile  .mat-sidenav {
     max-width: 240px;
     width: 100%;
-    
+
      .userDisplaName {
         font-size: 17px!important;
     }
@@ -132,3 +131,20 @@ $base-bgcolor :#22233C;
         fill: #fff;
     }
   }
+
+  .burgerMenu {
+      background-color: transparent;
+      border: none;
+      position: relative;
+      top: 0;
+      left: 0;
+      fill: #fff;
+      display: flex;
+      justify-content: start;
+      margin: 30px;
+  }
+
+  .burgerMenu:focus {
+      outline: none;
+  }
+
