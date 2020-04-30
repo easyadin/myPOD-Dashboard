@@ -16,7 +16,7 @@ $base-bgcolor :#22233C;
     /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
        causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
     flex: 1;
-    max-width: 260px;
+    background-color: $base-bgcolor;
   }
 
   .example-is-mobile .example-sidenav-container {
@@ -40,13 +40,13 @@ $base-bgcolor :#22233C;
     background-color: $base-bgcolor;
     width: 100%;
     overflow: visible!important;
+    max-width: 260px;
   }
 
   .left-nav-container {
     
       .authstatusParent {
-        padding-top:10px;
-        height: 150px;
+        height: 120px;
         border-bottom: 2px solid #25273E;
     
         .authstatus-container {
@@ -121,7 +121,6 @@ $base-bgcolor :#22233C;
       }
   }
 
-
   .active.current {
     border-right: 3px solid #fff;
     color: #fff;
@@ -132,19 +131,87 @@ $base-bgcolor :#22233C;
     }
   }
 
+  .topnav {
+    top: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .searchContainer {
+        opacity: 0.4;
+        font-family: Roboto;
+        font-size: 18px;
+        line-height: 25px;
+        width: 100%;
+        max-width: 250px;
+        color: #fff;
+
+        input {
+            font-size: 20px;
+            color: #fff;
+        }
+        input::placeholder {
+            font-size: 15px;
+            color: #fff;
+        }
+
+        .mat-form-field-appearance-legacy .mat-form-field-label {
+            color: #fff!important;
+
+            span {
+                color: #fff!important;
+            }
+        }
+    }
+
+    .uploadBtn {
+        height: 50px;
+        width: 140px;
+        border-radius: 6px;
+        background-color: rgba(33,100,231,0.5);
+        border:none;
+        color: #fff;
+        font-family: Roboto;
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: 0.8px;
+        line-height: 0;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .uploadBtnMobile {
+        font-size: 15px;
+        height: 40px;
+        width: 110px;
+    }
+  }
+
   .burgerMenu {
       background-color: transparent;
       border: none;
-      position: relative;
-      top: 0;
-      left: 0;
       fill: #fff;
       display: flex;
-      justify-content: start;
-      margin: 30px;
+      justify-content: flex-start;
+      padding:0px;
+      height: 100%;
   }
 
   .burgerMenu:focus {
       outline: none;
+  }
+
+
+  .mat-sidenav-content {
+    margin: 30px;
+  } 
+
+  .contentArea {
+     margin-left: 300px!important;
+     margin-right: 75px;
+     background-color: $base-bgcolor;
   }
 

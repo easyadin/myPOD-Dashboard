@@ -8,6 +8,11 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms'; 
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 const modules = [
   MatButtonModule,
@@ -17,7 +22,11 @@ const modules = [
   MatToolbarModule,
   MatCardModule,
   MatTabsModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatInputModule,
+  MatFormFieldModule,
+  FormsModule,
+  ReactiveFormsModule
 ];
 
 @NgModule({

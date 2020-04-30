@@ -1,8 +1,9 @@
 <!-- nav bar -->
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-    <button (click)="openSidenav()" *ngIf ="mobileQuery.matches" class="burgerMenu">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h12v2H3v-2zm0 7h18v2H3v-2z"/></svg>
-    </button>
+
+   
+
+  
 
     <!-- <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0"> -->
     <mat-sidenav-container class="example-sidenav-container" (backdropClick)="closeSidenav()">
@@ -32,12 +33,36 @@
     
         </mat-sidenav>
      
-      <mat-sidenav-content>
-        <router-outlet></router-outlet>
-     </mat-sidenav-content> 
+        <mat-sidenav-content  autosize class="mat-sidenav-content" [style.paddingLeft.px] = "mobileQuery.matches ? 0 : 30" [ngClass] = "{'contentArea' : !mobileQuery.matches}">
+
+            <mat-toolbar-row class="topnav">
+                <button (click)="openSidenav()" *ngIf ="mobileQuery.matches" class="burgerMenu">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h12v2H3v-2zm0 7h18v2H3v-2z"/></svg>
+                </button>
+            
+                <mat-form-field class="searchContainer">
+                    <input matInput type="search" [(ngModel)] ="value" placeholder="Search message, speaker, albums ...">
+                    
+                    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+
+                </mat-form-field>
+        
+                <button class="uploadBtn" [ngClass] = "{'uploadBtnMobile' : mobileQuery.matches}"> UPLOAD    <mat-icon>add</mat-icon> </button>
+                
+            </mat-toolbar-row>
+
+            <router-outlet> </router-outlet>
+    
+
+        </mat-sidenav-content> 
             
      </mat-sidenav-container>
      
+
+
+
      <!-- search and upload button -->
      
      

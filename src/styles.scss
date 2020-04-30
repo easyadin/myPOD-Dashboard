@@ -13,3 +13,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-drawer-backdrop.mat-drawer-shown {
     background-color: $base-bgcolor;
 }
+
+.mat-form-field-appearance-legacy .mat-form-field-label {
+    color: rgba(0,0,0,.54);
+    color: #fff!important;
+}
