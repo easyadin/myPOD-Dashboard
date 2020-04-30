@@ -18,19 +18,20 @@ $base-bgcolor :#22233C;
     /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
        causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
     flex: 1;
-    max-width: 305px;
+    max-width: 260px;
   }
 
   .example-is-mobile .example-sidenav-container {
     /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
        `<body>` to be our scrolling element for mobile layouts. */
     flex: 1 0 auto;
-    max-width: 100px;
+    background-color: $base-bgcolor;
   }
   
   .example-is-mobile  .mat-sidenav {
-    max-width: 270px;
-
+    max-width: 240px;
+    width: 100%;
+    
      .userDisplaName {
         font-size: 17px!important;
     }
@@ -104,7 +105,7 @@ $base-bgcolor :#22233C;
             color: #fff;
             line-height: 23px;
             letter-spacing: .1px;
-            
+
             svg {
                 fill:#fff;
             }
