@@ -1,3 +1,5 @@
+$base-bgcolor :#22233C;
+
 .example-container {
     display: flex;
     flex-direction: column;
@@ -6,27 +8,126 @@
     bottom: 0;
     left: 0;
     right: 0;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+    background-color: $base-bgcolor;
   }
   
-  .example-is-mobile .example-toolbar {
-    position: fixed;
-    /* Make sure the toolbar will stay on top of the content as it scrolls past. */
-    z-index: 2;
-  }
-  
-  h1.example-app-name {
-    margin-left: 8px;
-  }
+
   
   .example-sidenav-container {
     /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
        causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
     flex: 1;
+    max-width: 305px;
   }
-  
+
   .example-is-mobile .example-sidenav-container {
     /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
        `<body>` to be our scrolling element for mobile layouts. */
     flex: 1 0 auto;
+    max-width: 100px;
   }
   
+  .example-is-mobile  .mat-sidenav {
+    max-width: 270px;
+
+     .userDisplaName {
+        font-size: 17px!important;
+    }
+  }
+
+  .mat-sidenav {
+    background-color: $base-bgcolor;
+    width: 100%;
+    overflow: visible!important;
+  }
+
+  .left-nav-container {
+    
+      .authstatusParent {
+        padding-top:10px;
+        height: 150px;
+        border-bottom: 2px solid #25273E;
+    
+        .authstatus-container {
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            justify-content: flex-start;
+            padding-left: 10px;
+
+            .userDisplaName {
+                margin: auto;
+                margin-left: 20px;
+                color: #FFF;
+                font-family: Roboto;
+                font-size: 20px;
+                line-height: 23px;
+
+                button {
+                        box-sizing: border-box;
+                        height: 24px;
+                        opacity: 0.3;
+                        border-radius: 6px;
+                        border: 1px solid #FFF;
+                        background-color: transparent;
+                        color: #fff;
+                        margin-top: 8px;
+                }
+            }
+        }
+
+        .authstatus-icon {
+            display: block;
+            padding:4px;
+            border: 2px solid #2164E7;
+            box-sizing: border-box;
+            border-radius: 100%;
+            height: 74px;
+            width: 74px;
+            opacity: 0.8;
+
+            svg {
+                max-width: 68px;
+                max-height: 68px;
+                height: 100%;
+                width: 100%;
+                fill: #2164E7;
+                display: block;
+            }
+        }
+
+      }
+
+        .menuLink {
+            opacity: 0.3;
+            color: #fff;
+            line-height: 23px;
+            letter-spacing: .1px;
+            
+            svg {
+                fill:#fff;
+            }
+        }
+
+      .menuItem {
+          padding-left: 10px;
+            display: flex;
+            align-items: center;
+
+            svg {
+                margin-right: 20px;
+            }
+      }
+  }
+
+
+  .active.current {
+    border-right: 3px solid #fff;
+    color: #fff;
+    opacity: 1!important;
+
+    svg {
+        fill: #fff;
+    }
+  }

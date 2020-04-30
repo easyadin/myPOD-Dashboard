@@ -2,3 +2,9 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.mat-drawer-inner-container {
+    overflow: visible!important;
+    width: 100%;
+}
