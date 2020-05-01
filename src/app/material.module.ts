@@ -12,7 +12,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms'; 
 import { ReactiveFormsModule } from '@angular/forms';
-
+import {MatGridListModule} from '@angular/material/grid-list';
 
 const modules = [
   MatButtonModule,
@@ -26,7 +26,8 @@ const modules = [
   MatInputModule,
   MatFormFieldModule,
   FormsModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  MatGridListModule
 ];
 
 @NgModule({

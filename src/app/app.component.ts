@@ -3,7 +3,7 @@ import { OnInit, ViewChild } from '@angular/core';
 import {MediaMatcher} from '@angular/cdk/layout';
 import {ChangeDetectorRef, OnDestroy} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
-
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +11,9 @@ import {MatSidenav} from '@angular/material/sidenav';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  hideRequiredControl = new FormControl(false);
+  floatLabelControl = new FormControl('auto');
+
   title = 'myPOD-Dashboard';
   @ViewChild('sidenav') sidenav: MatSidenav;
 

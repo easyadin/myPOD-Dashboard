@@ -33,21 +33,26 @@
     
         </mat-sidenav>
      
+        <!-- content area -->
         <mat-sidenav-content  autosize class="mat-sidenav-content" [style.paddingLeft.px] = "mobileQuery.matches ? 0 : 30" [ngClass] = "{'contentArea' : !mobileQuery.matches}">
 
             <mat-toolbar-row class="topnav">
                 <button (click)="openSidenav()" *ngIf ="mobileQuery.matches" class="burgerMenu">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"/><path d="M3 4h18v2H3V4zm0 7h12v2H3v-2zm0 7h18v2H3v-2z"/></svg>
                 </button>
-            
-                <mat-form-field class="searchContainer">
+              
+               <span class="searchWrap">
+                <mat-icon>search</mat-icon>
+                    <!-- search and upload button -->
+                <mat-form-field class="searchContainer" appearance="fill" [hideRequiredMarker]="hideRequiredControl.value" [floatLabel]="floatLabelControl.value" [ngClass] = "{'mobileSearch' : mobileQuery.matches}">
+
                     <input matInput type="search" [(ngModel)] ="value" placeholder="Search message, speaker, albums ...">
                     
                     <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
                         <mat-icon>close</mat-icon>
                     </button>
-
                 </mat-form-field>
+               </span>
         
                 <button class="uploadBtn" [ngClass] = "{'uploadBtnMobile' : mobileQuery.matches}"> UPLOAD    <mat-icon>add</mat-icon> </button>
                 
@@ -56,6 +61,70 @@
             <router-outlet> </router-outlet>
     
 
+                
+        <!-- footer for slider player-->
+<!-- desktop-->
+<div class="media-footer">
+    <mat-toolbar  class="base-color footer">
+      <!-- slider-->
+      <!-- <mat-toolbar-row>
+         {{ state?.readableCurrentTime }}
+         <mat-slider class="time-slider" min="0" [max]="state?.duration" step="1" [value]="state?.currentTime"
+          (input)="onSliderChangeEnd($event)" [disabled]="state?.error || currentFile.index === undefined"></mat-slider>
+         {{ state?.readableDuration }}
+      </mat-toolbar-row> -->
+
+      <mat-toolbar-row class="media-action-bar">
+        <button mat-button  >
+          <mat-icon mat-list-icon class="audioControl">skip_previous</mat-icon>
+        </button>
+
+        <button mat-button >
+          <mat-icon mat-list-icon>play_circle_outline</mat-icon>
+        </button>
+
+        <button mat-button >
+          <mat-icon mat-list-icon>pause_circle_outline</mat-icon>
+        </button>
+
+        <button  mat-button >
+          <mat-icon mat-list-icon class="audioControl">skip_next</mat-icon>
+        </button>
+        
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
+
+
+        <div class="sliderPlayer" *ngIf="!mobileQuery.matches">
+           <!-- player details -->
+           <span class="playerDetails">
+                <!-- name and speaker -->
+                <span class="audioDetails">
+                        <span>Understanding the Blood of Jesus </span> <br>
+                        <span>Pastor Toye Fakunle</span>
+                </span>
+
+        <!--- slider -->
+                <span class="matSliderContainer">
+                    <mat-slider min="1" max="5" step="0.5" value="1.5"></mat-slider> <span>4:10</span>
+                </span>
+
+                <!-- button -->
+                <span class="mediaButtonContainer">
+                    <mat-icon>skip_previous</mat-icon>
+                    <!-- <mat-icon class="pause_play">pause_circle_filled</mat-icon> -->
+                    <mat-icon  class="pause_play">play_circle_filled</mat-icon>
+                    <mat-icon>skip_next</mat-icon>
+                </span>
+           </span>
+
+           <!-- -->
+           <span class="mypodlogo">
+               mi-POD
+           </span>
+        </div>
+
         </mat-sidenav-content> 
             
      </mat-sidenav-container>
@@ -63,14 +132,13 @@
 
 
 
-     <!-- search and upload button -->
+
      
      
-     <!-- content area -->
+
      
      
-     
-     <!-- footer for slider player-->
+ 
      
     </div>
 
