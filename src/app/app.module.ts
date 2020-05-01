@@ -34,7 +34,7 @@ import { MaterialModule } from './material.module';
       { path: '', component: LayoutComponent }, //default route
       { path: 'dashboard', component: DashboardComponent },
       { path: 'messages', component: MessagesComponent },
-      { path: 'Albums', component: AlbumsComponent },
+      { path: 'albums', component: AlbumsComponent },
       { path: 'speakers', component: SpeakersComponent },
       { path: 'genre', component: GenreComponent },
       { path: '**', component: NotFoundComponent } //not found

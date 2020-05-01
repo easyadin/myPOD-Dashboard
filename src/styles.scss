@@ -29,3 +29,24 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     display: none;
 }
 
+.mat-slider-horizontal {
+    min-width: 0px!important;
+}
+
+
+.mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button {
+    min-width: auto!important;
+}
+
+.mat-slider-wrapper {
+    background-color: rgba(200,200,200,1)!important;
+}
+
+.mat-accent .mat-slider-track-fill, .mat-accent .mat-slider-thumb, .mat-accent .mat-slider-thumb-label {
+    background-color: #fff;
+}
+
+.mat-toolbar-row {
+    color: #fff;
+}
+// rgba(200,200,200,0.41);

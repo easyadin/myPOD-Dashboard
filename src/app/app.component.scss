@@ -272,7 +272,6 @@ $base-bgcolor :#22233C;
     }
 }
 
-
   .mypodlogo {
     height: 35px;
     color: #FFF;
@@ -281,9 +280,12 @@ $base-bgcolor :#22233C;
     font-weight: 700;
     line-height: 35px;
     text-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
-    margin-right: 30px;
+    margin-left: 30px;
   }
 
+  .mypodlogoMobile {
+      display: none;
+  }
 
   .matSliderContainer {
       max-width: 70%;
@@ -293,30 +295,40 @@ $base-bgcolor :#22233C;
       mat-slider {
           width: 100%;
           max-width: 90%;
+          color: #fff;
+          background-color: #fff;
       }
   }
 
 
 
 
+  .playerBG {
+    background-color: #1F2136!important;
+  }
 
   .media-footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    background-color: #1F2136;
+    margin-bottom: 50px;
+    background-color: $base-bgcolor!important;
+    background: $base-bgcolor!important;
+    color: #fff!important;
+
+  
 
     .time-slider {
       width: 100% !important;
       margin-left: 20px;
       margin-right: 20px;
     }
+
     .media-action-bar {
       width: 100%;
       padding: 2.5rem;
       justify-content: center;
-      background-color: #1F2136;
-
+    
       button:disabled .mat-icon{
         color: #7B7B7B;
       }
@@ -332,7 +344,38 @@ $base-bgcolor :#22233C;
         height: 24px !important;
         width: 24px !important;
         font-size: 24px !important;
+        color: #fff;
       }
       
     }
   }
+
+  .audioDetailsMobile{
+     display: none;
+  }
+
+  .bg-color {
+    background: $base-bgcolor;
+    background-color: $base-bgcolor;
+  }
+  .bg-color2 {
+    background: $base-bgcolor;
+    background-color: $base-bgcolor;
+  }
+
+
+@media (max-width : 375px) {
+    .hideuploadBtn {
+        display: none!important;
+    }
+
+    .showuploadBtn {
+        display: flex;
+    }
+}
+
+.restyle-upload-btn {
+    height: auto!important;
+    width: auto!important;
+    border-radius: 4px;
+}

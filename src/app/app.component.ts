@@ -18,11 +18,13 @@ export class AppComponent {
   @ViewChild('sidenav') sidenav: MatSidenav;
 
   mobileQuery: MediaQueryList;
+  miniMobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
   value = '';
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this.mobileQuery = media.matchMedia('(max-width: 800px)');
+
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
    }
@@ -39,5 +41,10 @@ export class AppComponent {
 
   openSidenav(){
     this.sidenav.open();
+  }
+
+
+  onSliderChangeEnd($event) {
+
   }
 }
