@@ -1,52 +1,68 @@
 /* You can add global styles to this file, and also import other style files */
-$base-bgcolor :#22233C;
+$base-bgcolor: #22233c;
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .mat-drawer-inner-container {
-    overflow: visible!important;
-    width: 100%;
+  overflow: visible !important;
+  width: 100%;
 }
 
 .mat-drawer-backdrop.mat-drawer-shown {
-    background-color: $base-bgcolor;
+  background-color: $base-bgcolor;
 }
 
 .mat-form-field-appearance-legacy .mat-form-field-label {
-    color: rgba(0,0,0,.54);
-    color: #fff!important;
+  color: rgba(0, 0, 0, 0.54);
+  color: #fff !important;
 }
-
 
 .mat-form-field-appearance-legacy .mat-form-field-underline {
-    background-color: #fff;
+  background-color: #fff;
 }
 
-
-.mat-form-field-underline,.mat-form-field-appearance-fill .mat-form-field-underline::before {
-    display: none;
+.mat-form-field-underline,
+.mat-form-field-appearance-fill .mat-form-field-underline::before {
+  display: none;
 }
 
 .mat-slider-horizontal {
-    min-width: 0px!important;
+  min-width: 0px !important;
 }
 
-
-.mat-button, .mat-icon-button, .mat-stroked-button, .mat-flat-button {
-    min-width: auto!important;
+.mat-button,
+.mat-icon-button,
+.mat-stroked-button,
+.mat-flat-button {
+  min-width: auto !important;
 }
 
 .mat-slider-wrapper {
-    background-color: rgba(200,200,200,1)!important;
+  background-color: rgba(200, 200, 200, 1) !important;
 }
 
-.mat-accent .mat-slider-track-fill, .mat-accent .mat-slider-thumb, .mat-accent .mat-slider-thumb-label {
-    background-color: #fff;
+.mat-accent .mat-slider-track-fill,
+.mat-accent .mat-slider-thumb,
+.mat-accent .mat-slider-thumb-label {
+  background-color: #fff;
 }
 
 .mat-toolbar-row {
-    color: #fff;
+  color: #fff;
 }
 // rgba(200,200,200,0.41);
+
+.mat-form-field-infix {
+    width: 256px!important;
+}
+
+.mat-toolbar {
+    background: transparent!important;
+}
