@@ -1,28 +1,56 @@
-<div class="dialogContainer">
+<!-- audio information -->
+<div class="dialogContainer" *ngIf="!isSaving">
   <span> Provide more information on seleced audio files </span>
-<!-- audio title-->
+  <!-- audio title-->
   <mat-form-field appearance="fill">
     <mat-label>Audio Title</mat-label>
-    <input matInput [(ngModel)] = "data.audioTitle" required>
+    <input matInput [(ngModel)]="data.audioTitle" required />
     <mat-error *ngIf="data.audioTitle == ''"></mat-error>
   </mat-form-field>
 
   <!-- audio album -->
   <mat-form-field appearance="fill">
     <mat-label>Audio Album</mat-label>
-    <input matInput [(ngModel)] = "data.album">
+    <input matInput [(ngModel)]="data.album" />
     <!-- <mat-error *ngIf="data.album == ''"></mat-error> -->
   </mat-form-field>
 
-   <!-- speaker -->
-   <mat-form-field appearance="fill">
+  <!-- speaker -->
+  <mat-form-field appearance="fill">
     <mat-label>Speaker</mat-label>
-    <input matInput [(ngModel)] = "data.speakerName">
+    <input matInput [(ngModel)]="data.speakerName" />
     <!-- <mat-error *ngIf="data.album == ''"></mat-error> -->
   </mat-form-field>
 
   <div class="buttonContainer">
-    <button mat-raised-button color="primary"(click)="uploadAudio()">Save</button>
+    <button mat-raised-button color="primary" (click)="uploadAudio()">
+      Save
+    </button>
     <button mat-stroked-button (click)="cancelDialog()">Cancel</button>
+  </div>
+</div>
+
+<!-- uploading UI -->
+<div class="taskUploadContainer" *ngIf="isUploading">
+  <span *ngIf="isUploading">Uploading</span>
+
+  <div class="" *ngIf="isUploading">
+    <mat-progress-bar
+      mode="determinate"
+      value="90"
+      class="determinateSlider"
+    ></mat-progress-bar>
+    <div class="modifyProgress">
+      20% &#183; 8 seconds left
+      <!-- modify task progress -->
+      <mat-icon matRipple>pause</mat-icon>
+      <mat-icon matRipple>close</mat-icon>
+    </div>
+  </div>
+
+  <!-- upload complete-->
+  <div class="progressInformation" *ngIf="uploadComplete">
+    <span>Upload complete</span>
+    <mat-icon matRipple>check</mat-icon>
   </div>
 </div>

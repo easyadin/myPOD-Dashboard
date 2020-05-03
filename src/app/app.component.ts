@@ -1,3 +1,5 @@
+
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import { Component, Inject } from '@angular/core';
 import { OnInit, ViewChild } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
@@ -19,6 +21,7 @@ export interface DialogData {
   speakerName: string;
   audioUrl: string;
   album: string;
+  event: any;
   //...
 }
 
@@ -33,9 +36,10 @@ export class AppComponent {
 
   audioTitle: string;
   // audioDescription: string;
-  speakerName: 'Toye Fakunle'; //default speaker
+  speakerName: string; //default speaker
   audioUrl: string;
   album: string;
+  event: any;
   //...
 
   title = 'myPOD-Dashboard';
@@ -72,29 +76,26 @@ export class AppComponent {
   }
 
   onSliderChangeEnd($event) {}
+  
+  fileSelected(audioFile: any) {
+    //set audio file name
+    this.audioTitle = audioFile.target.files[0].name;
+    this.speakerName = "Toye Fakunle";
+    this.openDialog(audioFile);
+    // console.log(audioFile.target.files[0])
+  }
 
   // upload dialog
-  openDialog(): void {
+  openDialog(audioFile: any): void {
     const dialogRef = this.dialog.open(UploadDialog, {
       data:{audioTitle : this.audioTitle,  speakerName : this.speakerName,
-         audioUrl : this.audioUrl,
-      album : this.album}
+         audioUrl : this.audioUrl, album : this.album, event: audioFile }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result)
     })
   }
-
-  fileSelected(audioFile: any) {
-    //set audio file name
-    this.audioTitle = audioFile.target.files[0].name;
-    this.openDialog();
-    // console.log(audioFile.target.files[0])
-  }
-
-
-
 }
 
 
@@ -109,7 +110,15 @@ export class AppComponent {
   styleUrls: ['./app.component.scss'],
 })
 export class UploadDialog {
+  ref: AngularFireStorageReference;
+  task: AngularFireUploadTask;
+
+  isSaving: boolean =  false;
+  isUploading: boolean = false;
+  uploadComplete: boolean = false;
+
   constructor(
+    private afStorage : AngularFireStorage,
     public dialogRef: MatDialogRef<UploadDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
@@ -119,9 +128,17 @@ export class UploadDialog {
   }
 
   uploadAudio(){
-    //  console.log(this.data)
-    
+    this.isSaving = true;
+    this.isUploading = true;
+    // console.log(this.data.event.target.files[0]); // audio file information
 
+    const id = Math.random().toString(36).substring(2);
+    this.ref = this.afStorage.ref(id);
+    this.task = this.ref.put(this.data.event.target.files[0]); // push file
+
+    //finally close modal when upload completes
+    // this.dialogRef.close();
+    
   }
 
 

@@ -15,6 +15,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatRippleModule} from '@angular/material/core';
 
 const modules = [
   MatButtonModule,
@@ -31,7 +32,8 @@ const modules = [
   ReactiveFormsModule,
   MatGridListModule,
   MatProgressBarModule,
-  MatDialogModule
+  MatDialogModule,
+  MatRippleModule
 ];
 
 @NgModule({

@@ -416,29 +416,47 @@ $base-bgcolor: #22233c;
   }
 }
 
-
 .hideInputFile {
   -webkit-appearance: none;
-  -moz-appearance:    none;
-  appearance:         none;
+  -moz-appearance: none;
+  appearance: none;
   display: none;
 }
 
 .dialogContainer {
-   display: flex;
-   flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-   span {
+  span {
     margin: 10px 0;
     font-weight: 500;
-   }
+  }
 
-   .buttonContainer {
-     display: flex;
-     flex-direction: row;
+  .buttonContainer {
+    display: flex;
+    flex-direction: row;
 
-     button {
-       margin-right: 10px;
-     }
-   }
+    button {
+      margin-right: 10px;
+    }
+  }
+}
+
+.taskUploadContainer .determinateSlider {
+  margin: 5px 0px;
+}
+
+.progressInformation,
+.modifyProgress {
+  display: flex;
+  align-items: center;
+
+  mat-icon {
+    margin: 0px 10px;
+    color: #7b7b7b;
+    cursor: pointer;
+  }
+  .mat-icon:nth-child(2){
+    margin-right: 0px;
+  }
 }

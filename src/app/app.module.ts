@@ -2,6 +2,14 @@ import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+
+// import {
+//   AngularFireStorageReference,
+//   AngularFireUploadTask,
+//   StorageBucket
+// }  from "@angular/fire/storage";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent, UploadDialog } from './app.component';
@@ -32,6 +40,13 @@ import { MaterialModule } from './material.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    AngularFireModule.initializeApp({ // investigate security issues doing this
+      apiKey: "AIzaSyBTIN3bAPop-JH9TzG9Pbhwjo1VUvX7IxI",
+      authDomain: "fir-pci-restapi.firebaseapp.com",
+      projectId: "fir-pci-restapi",
+      storageBucket: "fir-pci-restapi.appspot.com",
+    }),
+    AngularFireStorageModule,
     RouterModule.forRoot([
       { path: '', component: LayoutComponent }, //default route
       { path: 'dashboard', component: DashboardComponent },
