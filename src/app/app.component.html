@@ -530,7 +530,9 @@
           </mat-form-field>
         </span>
 
-        <button
+        <!-- input file -->
+        <input type="file" accept="audio/*" #selectAudio class="hideInputFile" (change)="fileSelected($event)">
+        <button (click)="selectAudio.click()"
           class="uploadBtn"
           [ngClass]="{ 'restyle-upload-btn': mobileQuery.matches }"
         >

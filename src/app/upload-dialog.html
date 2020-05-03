@@ -1,0 +1,28 @@
+<div class="dialogContainer">
+  <span> Provide more information on seleced audio files </span>
+<!-- audio title-->
+  <mat-form-field appearance="fill">
+    <mat-label>Audio Title</mat-label>
+    <input matInput [(ngModel)] = "data.audioTitle" required>
+    <mat-error *ngIf="data.audioTitle == ''"></mat-error>
+  </mat-form-field>
+
+  <!-- audio album -->
+  <mat-form-field appearance="fill">
+    <mat-label>Audio Album</mat-label>
+    <input matInput [(ngModel)] = "data.album">
+    <!-- <mat-error *ngIf="data.album == ''"></mat-error> -->
+  </mat-form-field>
+
+   <!-- speaker -->
+   <mat-form-field appearance="fill">
+    <mat-label>Speaker</mat-label>
+    <input matInput [(ngModel)] = "data.speakerName">
+    <!-- <mat-error *ngIf="data.album == ''"></mat-error> -->
+  </mat-form-field>
+
+  <div class="buttonContainer">
+    <button mat-raised-button color="primary"(click)="uploadAudio()">Save</button>
+    <button mat-stroked-button (click)="cancelDialog()">Cancel</button>
+  </div>
+</div>

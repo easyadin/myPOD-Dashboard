@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { AppComponent, UploadDialog } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutComponent } from './layout/layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -15,9 +15,11 @@ import { GenreComponent } from './genre/genre.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MaterialModule } from './material.module';
 
+
+
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent, UploadDialog,
     LayoutComponent,
     DashboardComponent,
     MessagesComponent,

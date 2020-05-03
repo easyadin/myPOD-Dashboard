@@ -415,3 +415,30 @@ $base-bgcolor: #22233c;
     transform: rotate(362deg) scale(2.4);
   }
 }
+
+
+.hideInputFile {
+  -webkit-appearance: none;
+  -moz-appearance:    none;
+  appearance:         none;
+  display: none;
+}
+
+.dialogContainer {
+   display: flex;
+   flex-direction: column;
+
+   span {
+    margin: 10px 0;
+    font-weight: 500;
+   }
+
+   .buttonContainer {
+     display: flex;
+     flex-direction: row;
+
+     button {
+       margin-right: 10px;
+     }
+   }
+}
