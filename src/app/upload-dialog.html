@@ -31,25 +31,25 @@
 </div>
 
 <!-- uploading UI -->
-<div class="taskUploadContainer" *ngIf="isUploading">
+<div class="taskUploadContainer">
   <span *ngIf="isUploading">Uploading</span>
 
-  <div class="" *ngIf="isUploading">
-    <mat-progress-bar
+  <div class="">
+    <mat-progress-bar   *ngIf="uploadProgress | async as pct"
       mode="determinate"
-      value="90"
+      [value]="pct"
       class="determinateSlider"
     ></mat-progress-bar>
     <div class="modifyProgress">
       20% &#183; 8 seconds left
       <!-- modify task progress -->
       <mat-icon matRipple>pause</mat-icon>
-      <mat-icon matRipple>close</mat-icon>
+      <mat-icon matRipple (click) = cancelDialog()>close</mat-icon>
     </div>
   </div>
 
   <!-- upload complete-->
-  <div class="progressInformation" *ngIf="uploadComplete">
+  <div class="progressInformation">
     <span>Upload complete</span>
     <mat-icon matRipple>check</mat-icon>
   </div>

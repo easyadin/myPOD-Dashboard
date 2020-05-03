@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import { Component, Inject } from '@angular/core';
@@ -6,6 +7,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {ProgressBarMode} from '@angular/material/progress-bar';
 
 
 import {
@@ -13,6 +15,7 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { NumberSymbol } from '@angular/common';
 
 //Upload data
 export interface DialogData {
@@ -31,6 +34,8 @@ export interface DialogData {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+
+
   hideRequiredControl = new FormControl(false);
   floatLabelControl = new FormControl('auto');
 
@@ -110,8 +115,11 @@ export class AppComponent {
   styleUrls: ['./app.component.scss'],
 })
 export class UploadDialog {
+  mode: ProgressBarMode = 'determinate';
+
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
+  uploadProgress : Observable<number>;
 
   isSaving: boolean =  false;
   isUploading: boolean = false;
@@ -125,20 +133,25 @@ export class UploadDialog {
 
   cancelDialog(): void {
     this.dialogRef.close();
+    this.isSaving =  false;
+    this.isUploading = false;
+    this.uploadComplete = false;
+
   }
 
   uploadAudio(){
-    this.isSaving = true;
-    this.isUploading = true;
-    // console.log(this.data.event.target.files[0]); // audio file information
-
     const id = Math.random().toString(36).substring(2);
     this.ref = this.afStorage.ref(id);
     this.task = this.ref.put(this.data.event.target.files[0]); // push file
+    debugger
+    //monitor progress
+    this.uploadProgress = this.task.percentageChanges();
+    console.log(this.uploadProgress)
 
+    
     //finally close modal when upload completes
     // this.dialogRef.close();
-    
+
   }
 
 
