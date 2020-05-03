@@ -26,30 +26,29 @@
     <button mat-raised-button color="primary" (click)="uploadAudio()">
       Save
     </button>
-    <button mat-stroked-button (click)="cancelDialog()">Cancel</button>
+    <button mat-stroked-button (click)="task.cancel(); cancelDialog()">Cancel</button>
   </div>
 </div>
 
 <!-- uploading UI -->
-<div class="taskUploadContainer">
-  <span *ngIf="isUploading">Uploading</span>
+<div class="taskUploadContainer" *ngIf="uploadProgress | async as pct">
+  <span>Uploading</span>
 
-  <div class="">
-    <mat-progress-bar   *ngIf="uploadProgress | async as pct"
+  <div class="" *ngIf="uploadState | async; let state">
+    <mat-progress-bar *ngIf="uploadProgress | async as pct"
       mode="determinate"
       [value]="pct"
       class="determinateSlider"
     ></mat-progress-bar>
-    <div class="modifyProgress">
-      20% &#183; 8 seconds left
-      <!-- modify task progress -->
-      <mat-icon matRipple>pause</mat-icon>
-      <mat-icon matRipple (click) = cancelDialog()>close</mat-icon>
+
+    <div class="modifyProgress" *ngIf="uploadProgress | async as pct">
+      {{pct | number}}%
+       <!-- &#183; 8 seconds left -->
     </div>
   </div>
 
   <!-- upload complete-->
-  <div class="progressInformation">
+  <div class="progressInformation" *ngIf="uploadComplete">
     <span>Upload complete</span>
     <mat-icon matRipple>check</mat-icon>
   </div>

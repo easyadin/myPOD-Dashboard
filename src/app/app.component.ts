@@ -1,14 +1,20 @@
-import { Observable } from 'rxjs/Observable';
 
-import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
+import { Observable } from 'rxjs/Observable';
+import {map, startWith} from "rxjs/operators";
+import {
+  AngularFireStorage,
+  AngularFireStorageReference,
+  AngularFireUploadTask,
+} from '@angular/fire/storage';
 import { Component, Inject } from '@angular/core';
 import { OnInit, ViewChild } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import {ProgressBarMode} from '@angular/material/progress-bar';
-
+import { ProgressBarMode } from '@angular/material/progress-bar';
+import { of } from 'rxjs';
+import { catchError, finalize } from 'rxjs/operators';
 
 import {
   MatDialog,
@@ -34,8 +40,6 @@ export interface DialogData {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-
-
   hideRequiredControl = new FormControl(false);
   floatLabelControl = new FormControl('auto');
 
@@ -81,11 +85,11 @@ export class AppComponent {
   }
 
   onSliderChangeEnd($event) {}
-  
+
   fileSelected(audioFile: any) {
     //set audio file name
     this.audioTitle = audioFile.target.files[0].name;
-    this.speakerName = "Toye Fakunle";
+    this.speakerName = 'Toye Fakunle';
     this.openDialog(audioFile);
     // console.log(audioFile.target.files[0])
   }
@@ -93,21 +97,21 @@ export class AppComponent {
   // upload dialog
   openDialog(audioFile: any): void {
     const dialogRef = this.dialog.open(UploadDialog, {
-      data:{audioTitle : this.audioTitle,  speakerName : this.speakerName,
-         audioUrl : this.audioUrl, album : this.album, event: audioFile }
+      data: {
+        audioTitle: this.audioTitle,
+        speakerName: this.speakerName,
+        audioUrl: this.audioUrl,
+        album: this.album,
+        event: audioFile,
+      },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
-    })
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
+    });
   }
 }
-
-
-
-
-
-
+/////////////////////////////////////
 // dialog component
 @Component({
   selector: 'upload-dialog',
@@ -119,40 +123,54 @@ export class UploadDialog {
 
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
-  uploadProgress : Observable<number>;
+  uploadProgress: Observable<number>;
+  getAudioUrl: Observable<string>;
+  audioURL: string;
+  uploadState : Observable<string>;
 
-  isSaving: boolean =  false;
+
+  isSaving: boolean = false;
   isUploading: boolean = false;
   uploadComplete: boolean = false;
 
   constructor(
-    private afStorage : AngularFireStorage,
+    private afStorage: AngularFireStorage,
     public dialogRef: MatDialogRef<UploadDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
 
   cancelDialog(): void {
     this.dialogRef.close();
-    this.isSaving =  false;
+    this.isSaving = false;
     this.isUploading = false;
     this.uploadComplete = false;
-
   }
 
-  uploadAudio(){
+  uploadAudio() {
+    this.isSaving = true;
     const id = Math.random().toString(36).substring(2);
     this.ref = this.afStorage.ref(id);
     this.task = this.ref.put(this.data.event.target.files[0]); // push file
-    debugger
     //monitor progress
     this.uploadProgress = this.task.percentageChanges();
-    console.log(this.uploadProgress)
-
+    this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
+    //get audio url
+    this.task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.getAudioUrl = this.ref.getDownloadURL();
+          this.getAudioUrl.subscribe((url) => (this.audioURL = url,
+            this.uploadComplete = true,
+            //close dialog
+            setTimeout(()=> {
+              this.dialogRef.close();
+            },500)
+            ));
+        })
+      )
+      .subscribe();
     
-    //finally close modal when upload completes
-    // this.dialogRef.close();
-
+ 
   }
-
-
 }
