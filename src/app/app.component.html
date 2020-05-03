@@ -303,6 +303,10 @@
         </svg>
       </div>
 
+       <!-- upload tasks -->
+       <div class="uploadSlider" *ngIf="uploading">
+       Uploading file <mat-progress-bar mode="determinate" value="90" class="determinateSlider"></mat-progress-bar> 90%
+       </div>
   <!-- <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0"> -->
   <mat-sidenav-container
     class="example-sidenav-container"

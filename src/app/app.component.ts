@@ -21,6 +21,7 @@ export class AppComponent {
   miniMobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
   value = '';
+  uploading = false; // temp
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
     this.mobileQuery = media.matchMedia('(max-width: 800px)');
