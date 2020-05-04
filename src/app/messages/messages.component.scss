@@ -3,6 +3,25 @@
 $pinkLikeColor: rgba(255, 51, 102, 0.5);
 $greenLikeColor: rgba(31, 160, 148, 0.5);
 $yellowLikeColor: rgba(243, 202, 62, 0.5);
+$publish: rgba(42,201,64,0.5);
+$unpublish: rgba(255,95,88,0.5);
+$delete: #333;
+
+.PUBLISH button{
+    background-color: $publish;
+}
+
+.UNPUBLISH button{
+    background-color: $unpublish;
+}
+
+.DELETE button{
+    background-color: $delete;
+}
+
+button:focus {
+    outline: none;
+}
 
 .mainContainer {
   //desktop
@@ -48,6 +67,21 @@ $yellowLikeColor: rgba(243, 202, 62, 0.5);
         color: #fff;
         font-family: Roboto;
         font-weight: 100;
+      }
+
+      .modifyButton button {
+        box-sizing: border-box;
+        height: 35px;
+        width: 110px;
+        border-radius: 100px;
+        border: 1px solid #808080;
+        color: #fff;
+        color: #FFF;
+        font-family: Roboto;
+        font-size: 14px;
+        letter-spacing: 0.66px;
+        line-height: 18px;
+        cursor: pointer;
       }
     }
 
