@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@import url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap);
 
 $pinkLikeColor: rgba(255, 51, 102, 0.5);
 $greenLikeColor: rgba(31, 160, 148, 0.5);
@@ -26,21 +26,21 @@ $yellowLikeColor: rgba(243, 202, 62, 0.5);
     padding-right: 30px;
 
     svg {
-        margin-right: 16px;
+      margin-right: 16px;
     }
   }
 
   .FlexContainer:nth-child(1) {
-    border-right: 2px solid #272b3f;
+    border-right: 1px solid #272b3f;
     margin-right: 20px;
     padding-right: 20px;
 
     .countersOverview {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        max-height: 600px;
-        height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      max-height: 600px;
+      height: 60%;
     }
 
     @media (max-width: 425px) {
@@ -89,12 +89,41 @@ $yellowLikeColor: rgba(243, 202, 62, 0.5);
     }
   }
 
+  .audioList {
+    max-height: 460px;
+    overflow: auto;
 
- .playlistHeader {
-     display: flex;
- }
+    .audioTrack {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      padding: 10px;
 
-  @media (max-width: 425px) {
+      span {
+        margin: 10px;
+        opacity: 0.5;
+        color: #fff;
+        font-family: Roboto;
+        font-weight: 100;
+      }
+    }
+
+    .audioTrack:nth-child(even) {
+      background-color: rgba(30, 33, 53, 0.82);
+    }
+  }
+
+  .playlistHeader {
+    display: flex;
+  }
+
+  @media screen and (max-width: 425px) {
+    .audioList {
+      max-height: 32vh;
+      height: 100%;
+    }
     .FlexContainer:nth-child(1) {
       border-right: none;
       margin-right: 0;

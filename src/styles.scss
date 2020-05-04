@@ -60,22 +60,38 @@ body {
 // rgba(200,200,200,0.41);
 
 .mat-form-field-infix {
-    width: 256px!important;
+  width: 256px !important;
 }
 
 .mat-toolbar {
-    background: transparent!important;
+  background: transparent !important;
 }
-
 
 .determinateSlider {
-  
-
   .mat-progress-bar-fill::after {
-    background-color: #2AC940;
-}
+    background-color: #2ac940;
+  }
 }
 
 .mat-dialog-container {
   min-width: 300px;
+}
+
+@media (min-width: 800px) {
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: #22233c;
+  }
+
+  ::-webkit-scrollbar {
+    width: 2px;
+    background-color: #fff;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+  }
 }
