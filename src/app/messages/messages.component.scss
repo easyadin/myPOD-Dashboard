@@ -1,0 +1,103 @@
+@import url(https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap);
+
+$pinkLikeColor: rgba(255, 51, 102, 0.5);
+$greenLikeColor: rgba(31, 160, 148, 0.5);
+$yellowLikeColor: rgba(243, 202, 62, 0.5);
+
+.mainContainer {
+  //desktop
+  display: flex;
+  width: 100%;
+  margin-top: 30px;
+
+  h3 {
+    color: #fff;
+    font-family: "Lato", sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 100;
+  }
+
+  svg {
+    fill: #fff;
+  }
+
+  .FlexContainer {
+    padding-right: 30px;
+
+    svg {
+      margin-right: 16px;
+    }
+  }
+
+  .audioList {
+    max-height: 460px;
+    overflow: auto;
+
+    .audioTrack {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      padding: 10px;
+
+      span {
+        margin: 10px;
+        opacity: 0.5;
+        color: #fff;
+        font-family: Roboto;
+        font-weight: 100;
+      }
+    }
+
+    .audioTrack:nth-child(even) {
+      background-color: rgba(30, 33, 53, 0.82);
+    }
+  }
+
+  .playlistHeader {
+    display: flex;
+  }
+
+  @media screen and (max-width: 425px) {
+    .audioList {
+      max-height: 57vh;
+      height: 100%;
+    }
+    .FlexContainer:nth-child(1) {
+      border-right: none;
+      margin-right: 0;
+      padding-right: 0px;
+      border-bottom: 2px solid #272b3f;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      margin-right: 35px;
+    }
+
+    .FlexContainer {
+      width: 100%;
+    }
+  }
+  @media screen and (max-height: 800px) {
+    max-height: 67vh;
+  }
+}
+
+@media (max-width: 800px) {
+  .mainContainer {
+    margin: 0px 20px;
+  }
+}
+
+@media (max-width: 425px) {
+  .mainContainer {
+    flex-wrap: wrap;
+  }
+  .counter {
+    font-size: 30px !important;
+  }
+  .counterLabel {
+    font-size: 12px !important;
+  }
+}
