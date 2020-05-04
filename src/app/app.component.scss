@@ -460,3 +460,14 @@ $base-bgcolor: #22233c;
     margin-right: 0px;
   }
 }
+
+
+@media (max-width:375px){
+  .mat-sidenav-content {
+    margin: 0px;
+  }
+
+  .media-footer {
+    margin-bottom: 0px;
+  }
+}

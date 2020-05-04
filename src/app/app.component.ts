@@ -170,7 +170,5 @@ export class UploadDialog {
         })
       )
       .subscribe();
-    
- 
   }
 }

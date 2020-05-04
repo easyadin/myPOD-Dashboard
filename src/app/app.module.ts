@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -5,6 +6,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
+import { HttpClientModule } from '@angular/common/http';
 // import {
 //   AngularFireStorageReference,
 //   AngularFireUploadTask,
@@ -40,11 +42,12 @@ import { MaterialModule } from './material.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     AngularFireModule.initializeApp({ // investigate security issues doing this
-      apiKey: "AIzaSyBTIN3bAPop-JH9TzG9Pbhwjo1VUvX7IxI",
-      authDomain: "fir-pci-restapi.firebaseapp.com",
-      projectId: "fir-pci-restapi",
-      storageBucket: "fir-pci-restapi.appspot.com",
+      apiKey: environment.apiKey,
+      authDomain: environment.authDomain,
+      projectId: environment.projectId ,
+      storageBucket: environment.storageBucket,
     }),
     AngularFireStorageModule,
     RouterModule.forRoot([
