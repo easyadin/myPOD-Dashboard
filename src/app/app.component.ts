@@ -1,6 +1,7 @@
-
+import { CloudService } from './services/cloud.service';
+import { AudioModel } from './interfaces/audio.model';
 import { Observable } from 'rxjs/Observable';
-import {map, startWith} from "rxjs/operators";
+import { map, startWith } from 'rxjs/operators';
 import {
   AngularFireStorage,
   AngularFireStorageReference,
@@ -23,16 +24,16 @@ import {
 } from '@angular/material/dialog';
 import { NumberSymbol } from '@angular/common';
 
-//Upload data
-export interface DialogData {
-  audioTitle: string;
-  // audioDescription: string;
-  speakerName: string;
-  audioUrl: string;
-  album: string;
-  event: any;
-  //...
-}
+// // Upload data
+// export interface DialogData {
+//   audioTitle: string;
+//   // audioDescription: string;
+//   speakerName: string;
+//   audioUrl: string;
+//   album: string;
+//   event: any;
+//   // ...
+// }
 
 @Component({
   selector: 'app-root',
@@ -44,12 +45,11 @@ export class AppComponent {
   floatLabelControl = new FormControl('auto');
 
   audioTitle: string;
-  // audioDescription: string;
-  speakerName: string; //default speaker
-  audioUrl: string;
   album: string;
+  speakerName: string;
+  audioUrl: string;
+  status: string;
   event: any;
-  //...
 
   title = 'myPOD-Dashboard';
   @ViewChild('sidenav') sidenav: MatSidenav;
@@ -87,27 +87,28 @@ export class AppComponent {
   onSliderChangeEnd($event) {}
 
   fileSelected(audioFile: any) {
-    //set audio file name
+    //set default audio file details
     this.audioTitle = audioFile.target.files[0].name;
     this.speakerName = 'Toye Fakunle';
+    this.status = 'new';
     this.openDialog(audioFile);
-    // console.log(audioFile.target.files[0])
   }
 
-  // upload dialog
+  // send data to dialog
   openDialog(audioFile: any): void {
     const dialogRef = this.dialog.open(UploadDialog, {
       data: {
         audioTitle: this.audioTitle,
+        album: this.album,
         speakerName: this.speakerName,
         audioUrl: this.audioUrl,
-        album: this.album,
+        status: this.status,
         event: audioFile,
       },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
+      // console.log(result);
     });
   }
 }
@@ -120,23 +121,24 @@ export class AppComponent {
 })
 export class UploadDialog {
   mode: ProgressBarMode = 'determinate';
-
   ref: AngularFireStorageReference;
   task: AngularFireUploadTask;
   uploadProgress: Observable<number>;
   getAudioUrl: Observable<string>;
   audioURL: string;
-  uploadState : Observable<string>;
-
+  uploadState: Observable<string>;
 
   isSaving: boolean = false;
   isUploading: boolean = false;
   uploadComplete: boolean = false;
 
+  postAudio: AudioModel;
+
   constructor(
+    public cloudService: CloudService,
     private afStorage: AngularFireStorage,
     public dialogRef: MatDialogRef<UploadDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public data: AudioModel
   ) {}
 
   cancelDialog(): void {
@@ -153,22 +155,42 @@ export class UploadDialog {
     this.task = this.ref.put(this.data.event.target.files[0]); // push file
     //monitor progress
     this.uploadProgress = this.task.percentageChanges();
-    this.uploadState = this.task.snapshotChanges().pipe(map(s => s.state));
+    this.uploadState = this.task.snapshotChanges().pipe(map((s) => s.state));
     //get audio url
     this.task
       .snapshotChanges()
       .pipe(
         finalize(() => {
           this.getAudioUrl = this.ref.getDownloadURL();
-          this.getAudioUrl.subscribe((url) => (this.audioURL = url,
-            this.uploadComplete = true,
-            //close dialog
-            setTimeout(()=> {
-              this.dialogRef.close();
-            },500)
-            ));
+          this.getAudioUrl.subscribe(
+            (url) => (
+              (this.data.audioUrl = url),
+              (this.uploadComplete = true),
+              // post to api
+              this.addToAPI(id),
+              //close dialog
+              setTimeout(() => {
+                this.dialogRef.close();
+              }, 500)
+            )
+          );
         })
       )
       .subscribe();
+  }
+
+  addToAPI(id: string) {
+    this.postAudio = new AudioModel();
+    this.postAudio.album = this.data.album || '';
+    this.postAudio.audioTitle = this.data.audioTitle;
+    this.postAudio.speakerName = this.data.speakerName;
+    this.postAudio.audioUrl = this.data.audioUrl;
+    this.postAudio.status = this.data.status;
+    this.postAudio.event = this.data.event;
+    this.postAudio.id = id;
+    this.cloudService.addAudio(this.postAudio).subscribe((res) => {
+      // tell user to refresh 
+    });
+    // this.cloudService.addAudio(this.data),
   }
 }

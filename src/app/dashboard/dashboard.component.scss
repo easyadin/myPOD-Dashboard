@@ -51,6 +51,7 @@ $yellowLikeColor: rgba(243, 202, 62, 0.5);
         height: auto;
         width: 100%;
       }
+      
     }
 
     .autoCard {
@@ -59,6 +60,7 @@ $yellowLikeColor: rgba(243, 202, 62, 0.5);
       width: auto;
       height: auto;
       padding: 10px;
+      margin-bottom: 20px;
 
       .counter {
         color: #fff;
@@ -155,5 +157,8 @@ $yellowLikeColor: rgba(243, 202, 62, 0.5);
   }
   .counterLabel {
     font-size: 12px !important;
+  }
+  .autoCard {
+    margin-bottom: 0px!important;
   }
 }
