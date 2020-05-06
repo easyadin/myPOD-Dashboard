@@ -6,17 +6,17 @@
     <div class="countersOverview">
       <!-- total messages-->
       <div class="autoCard">
-        <div class="counter">250</div>
+        <div class="counter">{{TotalMessages}}</div>
         <div class="counterLabel">Total messages</div>
       </div>
       <!-- Published messages-->
       <div class="autoCard">
-        <div class="counter">50</div>
+        <div class="counter"  *ngIf="Published | async as value">{{value}}</div>
         <div class="counterLabel">Published</div>
       </div>
       <!-- Yet to be published -->
       <div class="autoCard">
-        <div class="counter">200</div>
+        <div class="counter"  *ngIf="Pending | async as value">{{value}}</div>
         <div class="counterLabel">Pending</div>
       </div>
     </div>

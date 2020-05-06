@@ -9,22 +9,25 @@ import { Observable, throwError } from 'rxjs';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
- audiofiles$: AudioModel[];
-
-  constructor(public cloudService: CloudService) {
-
-    
-  }
+  audiofiles$: AudioModel[];
+  TotalMessages;
+  Published: Observable<number>;
+  Pending: Observable<number>;
+  constructor(public cloudService: CloudService) {}
 
   ngOnInit() {
     // get media files
-    return this.cloudService
-      .getAudioFiles()
-      .subscribe((data) => {
+    return this.cloudService.getAudioFiles().subscribe(
+      (data) => {
         this.audiofiles$ = data;
+        this.TotalMessages = this.audiofiles$.length;
+
+        //get pending audio count
+        
       },
       (error) => {
         console.log('erroe occured: ', error);
-      });
+      }
+    );
   }
 }
