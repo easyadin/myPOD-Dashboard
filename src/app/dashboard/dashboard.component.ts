@@ -3,16 +3,18 @@ import { Component, OnInit } from '@angular/core';
 import { CloudService } from '../services/cloud.service';
 import { Observable, throwError } from 'rxjs';
 
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  audiofiles$: AudioModel[];
+ audiofiles$: AudioModel[];
 
-  constructor(public cloudService: CloudService) {}
+  constructor(public cloudService: CloudService) {
+
+    
+  }
 
   ngOnInit() {
     // get media files

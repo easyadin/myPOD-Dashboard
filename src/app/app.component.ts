@@ -24,16 +24,6 @@ import {
 } from '@angular/material/dialog';
 import { NumberSymbol } from '@angular/common';
 
-// // Upload data
-// export interface DialogData {
-//   audioTitle: string;
-//   // audioDescription: string;
-//   speakerName: string;
-//   audioUrl: string;
-//   album: string;
-//   event: any;
-//   // ...
-// }
 
 @Component({
   selector: 'app-root',
@@ -189,8 +179,9 @@ export class UploadDialog {
     this.postAudio.event = this.data.event;
     this.postAudio.id = id;
     this.cloudService.addAudio(this.postAudio).subscribe((res) => {
-      // tell user to refresh 
+      // refresh
+      window.location.reload()
     });
-    // this.cloudService.addAudio(this.data),
+    
   }
 }

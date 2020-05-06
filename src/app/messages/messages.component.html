@@ -15,87 +15,16 @@
       </svg>
       <h3>Playlist</h3>
     </div>
+
     <!-- audio list-->
     <div class="audioList">
-      <div class="audioTrack">
-        <span>01</span>
-        <span>Understanding the Blood of Jesus</span>
-        <span>Pastor Toye Fakunle</span>
+      <div class="audioTrack" *ngFor="let audio of audiofiles$; let i = index">
+        <span>{{i+1}}</span>
+        <span>{{audio.audioTitle}}</span>
+        <span>{{audio.speakerName}}</span>
         <span>5:20</span>
-        <span class="modifyButton UNPUBLISH"> <button matRipple>UNPUBLISH</button> </span>
-        <span  class="modifyButton DELETE"> <button matRipple>DELETE</button> </span>
-      </div>
-      <div class="audioTrack">
-        <span>01</span>
-        <span>Understanding the Blood of Jesus</span>
-        <span>Pastor Toye Fakunle</span>
-        <span>5:20</span>
-        <span class="modifyButton PUBLISH"> <button matRipple>UNPUBLISH</button> </span>
-        <span  class="modifyButton DELETE"> <button matRipple>DELETE</button> </span>
-      </div>
-      <div class="audioTrack">
-        <span>01</span>
-        <span>Understanding the Blood of Jesus</span>
-        <span>Pastor Toye Fakunle</span>
-        <span>5:20</span>
-        <span class="modifyButton UNPUBLISH"> <button matRipple>UNPUBLISH</button> </span>
-        <span  class="modifyButton DELETE"> <button matRipple>DELETE</button> </span>
-      </div>
-      <div class="audioTrack">
-        <span>01</span>
-        <span>Understanding the Blood of Jesus</span>
-        <span>Pastor Toye Fakunle</span>
-        <span>5:20</span>
-        <span class="modifyButton PUBLISH"> <button matRipple>UNPUBLISH</button> </span>
-        <span  class="modifyButton DELETE"> <button matRipple>DELETE</button> </span>
-      </div>
-      <div class="audioTrack">
-        <span>01</span>
-        <span>Understanding the Blood of Jesus</span>
-        <span>Pastor Toye Fakunle</span>
-        <span>5:20</span>
-        <span class="modifyButton UNPUBLISH"> <button matRipple>UNPUBLISH</button> </span>
-        <span  class="modifyButton DELETE"> <button matRipple>DELETE</button> </span>
-      </div>
-      <div class="audioTrack">
-        <span>01</span>
-        <span>Understanding the Blood of Jesus</span>
-        <span>Pastor Toye Fakunle</span>
-        <span>5:20</span>
-        <span class="modifyButton PUBLISH"> <button matRipple>UNPUBLISH</button> </span>
-        <span  class="modifyButton DELETE"> <button matRipple>DELETE</button> </span>
-      </div>
-      <div class="audioTrack">
-        <span>01</span>
-        <span>Understanding the Blood of Jesus</span>
-        <span>Pastor Toye Fakunle</span>
-        <span>5:20</span>
-        <span class="modifyButton UNPUBLISH"> <button matRipple>UNPUBLISH</button> </span>
-        <span  class="modifyButton DELETE"> <button matRipple>DELETE</button> </span>
-      </div>
-      <div class="audioTrack">
-        <span>01</span>
-        <span>Understanding the Blood of Jesus</span>
-        <span>Pastor Toye Fakunle</span>
-        <span>5:20</span>
-        <span class="modifyButton PUBLISH"> <button matRipple>UNPUBLISH</button> </span>
-        <span  class="modifyButton DELETE"> <button matRipple>DELETE</button> </span>
-      </div>
-      <div class="audioTrack">
-        <span>01</span>
-        <span>Understanding the Blood of Jesus</span>
-        <span>Pastor Toye Fakunle</span>
-        <span>5:20</span>
-        <span class="modifyButton UNPUBLISH"> <button matRipple>UNPUBLISH</button> </span>
-        <span  class="modifyButton DELETE"> <button matRipple>DELETE</button> </span>
-      </div>
-      <div class="audioTrack">
-        <span>01</span>
-        <span>Understanding the Blood of Jesus</span>
-        <span>Pastor Toye Fakunle</span>
-        <span>5:20</span>
-        <span class="modifyButton PUBLISH"> <button matRipple>UNPUBLISH</button> </span>
-        <span  class="modifyButton DELETE"> <button matRipple>DELETE</button> </span>
+        <span class="modifyButton UNPUBLISH"> <button matRipple (click)="updateStatus(audio, 'published')">UNPUBLISH</button> </span>
+        <span  class="modifyButton DELETE"> <button matRipple (click)="deleteAudio(audio.audioUrl,audio.id)">DELETE</button> </span>
       </div>
     </div>
   </div>

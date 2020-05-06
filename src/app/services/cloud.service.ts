@@ -36,6 +36,24 @@ export class CloudService {
       .pipe(catchError(this.handleError));
   }
 
+
+  //delete audio
+  deleteAudio(id: string):Observable<{}> {
+    const url =`${this.apiURL + '/delete'}/${id}`; 
+    return this.http.delete(url, this.httpOptions)
+    .pipe(catchError(this.handleError))
+  }
+
+
+  //update
+  updateAudio(audio: AudioModel): Observable<AudioModel> {
+    return this.http.put<AudioModel>(`${this.apiURL + '/update'}/${audio.id}`, audio, this.httpOptions)
+    .pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  // handle error
   handleError(error: HttpErrorResponse) {
     console.log(error);
     return throwError(error);
