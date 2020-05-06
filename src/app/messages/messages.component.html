@@ -23,7 +23,8 @@
         <span>{{audio.audioTitle}}</span>
         <span>{{audio.speakerName}}</span>
         <span>5:20</span>
-        <span class="modifyButton UNPUBLISH"> <button matRipple (click)="updateStatus(audio, 'published')">UNPUBLISH</button> </span>
+        <span class="modifyButton UNPUBLISH" *ngIf="audio.status == 'published'"> <button matRipple (click)="updateStatus(audio, 'new')">UNPUBLISH</button> </span>
+        <span class="modifyButton PUBLISH" *ngIf="audio.status == 'new'"> <button matRipple (click)="updateStatus(audio, 'published')">PUBLISH</button> </span>
         <span  class="modifyButton DELETE"> <button matRipple (click)="deleteAudio(audio.audioUrl,audio.id)">DELETE</button> </span>
       </div>
     </div>

@@ -176,7 +176,7 @@ export class UploadDialog {
     this.postAudio.speakerName = this.data.speakerName;
     this.postAudio.audioUrl = this.data.audioUrl;
     this.postAudio.status = this.data.status;
-    this.postAudio.event = this.data.event;
+    this.postAudio.event = '';
     this.postAudio.id = id;
     this.cloudService.addAudio(this.postAudio).subscribe((res) => {
       // refresh

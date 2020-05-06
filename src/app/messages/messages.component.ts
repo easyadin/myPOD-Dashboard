@@ -47,10 +47,8 @@ export class MessagesComponent implements OnInit {
 
     this.postAudio = new AudioModel();
     this.postAudio = audioFile
-    console.log(this.postAudio)
     this.cloudService.updateAudio(this.postAudio).subscribe((res) => {
-      // refresh
-      window.location.reload();
+     
      });
   }
 }
