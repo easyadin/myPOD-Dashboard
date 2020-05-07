@@ -11,12 +11,12 @@
       </div>
       <!-- Published messages-->
       <div class="autoCard">
-        <div class="counter"  *ngIf="Published | async as value">{{value}}</div>
+        <div class="counter">{{published}}</div>
         <div class="counterLabel">Published</div>
       </div>
       <!-- Yet to be published -->
       <div class="autoCard">
-        <div class="counter"  *ngIf="Pending | async as value">{{value}}</div>
+        <div class="counter">{{pending}}</div>
         <div class="counterLabel">Pending</div>
       </div>
     </div>
