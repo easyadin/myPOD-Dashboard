@@ -76,7 +76,6 @@ export class AudioService {
     this.stop$.next();
   }
 
-
   seekTo(seconds) {
     this.audioObj.currentTime = seconds;
   }

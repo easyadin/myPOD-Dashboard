@@ -10,7 +10,7 @@ import { publish } from 'rxjs/operators';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  audiofiles$: AudioModel[];
+  audiofiles$: Array<AudioModel> = [];
   published$: AudioModel[];
   pending$;
 
@@ -19,6 +19,10 @@ export class DashboardComponent implements OnInit {
   pending = 0;
 
   constructor(public cloudService: CloudService) {
+    
+  }
+
+  ngOnInit() {
     this.cloudService.getAudioFiles().subscribe(
       (data) => {
         this.audiofiles$ = data;
@@ -32,8 +36,6 @@ export class DashboardComponent implements OnInit {
       }
     );
   }
-
-  ngOnInit() {}
 
   getCounters() {
     this.published$ = this.audiofiles$.filter(

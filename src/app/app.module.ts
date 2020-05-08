@@ -7,11 +7,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { HttpClientModule } from '@angular/common/http';
-// import {
-//   AngularFireStorageReference,
-//   AngularFireUploadTask,
-//   StorageBucket
-// }  from "@angular/fire/storage";
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent, UploadDialog } from './app.component';
@@ -24,6 +20,7 @@ import { SpeakersComponent } from './speakers/speakers.component';
 import { GenreComponent } from './genre/genre.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MaterialModule } from './material.module';
+import { PlayerComponent,renderMessageList} from './pages/player/player.component';
 
 
 
@@ -36,7 +33,9 @@ import { MaterialModule } from './material.module';
     AlbumsComponent,
     SpeakersComponent,
     GenreComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    PlayerComponent,
+    renderMessageList
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { MessagesComponent } from './messages/messages.component';
 import { duration } from 'moment';
 import { CloudService } from './services/cloud.service';
 import { AudioModel } from './interfaces/audio.model';
@@ -17,7 +18,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { of } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
-
+import { NumberSymbol } from '@angular/common';
 import {
   MatDialog,
   MatDialogRef,
@@ -25,6 +26,7 @@ import {
 } from '@angular/material/dialog';
 import { StreamState } from './interfaces/stream-state';
 import * as moment from 'moment';
+import { AudioService } from './services/audio.service';
 
 @Component({
   selector: 'app-root',
@@ -32,9 +34,6 @@ import * as moment from 'moment';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  state: StreamState;
-  currentFile: any = {};
-
   hideRequiredControl = new FormControl(false);
   floatLabelControl = new FormControl('auto');
 
@@ -64,6 +63,8 @@ export class AppComponent {
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
+
+  ngOnInit() {}
 
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
@@ -109,6 +110,7 @@ export class AppComponent {
       // console.log(result);
     });
   }
+
 }
 /////////////////////////////////////
 // dialog component
@@ -211,7 +213,7 @@ export class UploadDialog {
     this.postAudio.event = '';
     this.postAudio.id = id;
     this.postAudio.duration = this.data.duration;
-    this.postAudio.duration = this.formatTime(this.postAudio.duration)
+    this.postAudio.duration = this.formatTime(this.postAudio.duration);
     this.cloudService.addAudio(this.postAudio).subscribe((res) => {
       // refresh
       window.location.reload();

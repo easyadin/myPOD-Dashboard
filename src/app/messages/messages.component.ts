@@ -1,11 +1,12 @@
 import { AudioModel } from './../interfaces/audio.model';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { CloudService } from '../services/cloud.service';
 import { Observable, throwError } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { StreamState } from '../interfaces/stream-state';
 import { AudioService } from '../services/audio.service';
+import { MediaMatcher } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-messages',
@@ -13,28 +14,40 @@ import { AudioService } from '../services/audio.service';
   styleUrls: ['./messages.component.scss'],
 })
 export class MessagesComponent implements OnInit {
-  audiofiles$: AudioModel[];
-  audioStatus;
-  postAudio: AudioModel;
-
+  audiofiles$: Array<AudioModel> = [];
   state: StreamState;
   currentFile: any = {};
 
+  audioStatus;
+  postAudio: AudioModel;
+
+
+  mobileQuery: MediaQueryList;
+  miniMobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
+  
   constructor(
     public audioService: AudioService,
     private _snackBar: MatSnackBar,
     public cloudService: CloudService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher
   ) {
+    //media query
+    this.mobileQuery = media.matchMedia('(max-width: 800px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
     // listen to stream state
     this.audioService.getState().subscribe((state) => {
       this.state = state;
     });
+   
   }
 
   ngOnInit() {
-    // get media files
-    this.cloudService.getAudioFiles().subscribe(
+     // get media files
+     this.cloudService.getAudioFiles().subscribe(
       (data) => {
         this.audiofiles$ = data;
       },
@@ -78,6 +91,11 @@ export class MessagesComponent implements OnInit {
     });
   }
 
+  onSliderChangeEnd(change) {
+    this.audioService.seekTo(change.value);
+  }
+
+
   // Stream audio ----------------
 
   playStream(url) {
@@ -94,6 +112,9 @@ export class MessagesComponent implements OnInit {
   play() {
     this.audioService.play();
   }
+  pause() {
+    this.audioService.pause();
+  }
   stop() {
     this.audioService.stop();
   }
@@ -103,5 +124,16 @@ export class MessagesComponent implements OnInit {
 
   isLastPlaying() {
     return this.currentFile.index === this.audiofiles$.length - 1;
+  }
+
+  next() {
+    const index = this.currentFile.index + 1;
+    const file = this.audiofiles$[index];
+    this.openFile(file, index);
+  }
+  previous() {
+    const index = this.currentFile.index - 1;
+    const file = this.audiofiles$[index];
+    this.openFile(file, index);
   }
 }

@@ -1,34 +1,131 @@
 <div class="mainContainer">
-  <!-- playlist -->
-  <div class="FlexContainer">
-    <div class="playlistHeader">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        width="24"
-        height="24"
-      >
-        <path fill="none" d="M0 0h24v24H0z" />
-        <path
-          d="M2 18h10v2H2v-2zm0-7h14v2H2v-2zm0-7h20v2H2V4zm17 11.17V9h5v2h-3v7a3 3 0 1 1-2-2.83z"
-        />
-      </svg>
-      <h3>Playlist</h3>
-    </div>
-
-    <!-- audio list-->
-    <div class="audioList">
-      <div class="audioTrack" *ngFor="let audio of audiofiles$; let i = index" (click)="openFile(audio, i)" matRipple>
-        <span>{{i+1}}</span>
-        <span>{{audio.audioTitle}}</span>
-        <span>{{audio.speakerName}}</span>
-        <span>{{audio.duration}}</span>
-        <span class="modifyButton UNPUBLISH" *ngIf="audio.status == 'published'"> <button matRipple (click)="updateStatus(audio, 'new', $event)">UNPUBLISH</button> </span>
-        <span class="modifyButton PUBLISH" *ngIf="audio.status == 'new'"> <button matRipple (click)="updateStatus(audio, 'published', $event)">PUBLISH</button> </span>
-        <span  class="modifyButton DELETE"> <button matRipple (click)="deleteAudio(audio,$event)">DELETE</button> </span>
+    <!-- playlist -->
+    <div class="FlexContainer">
+      <div class="playlistHeader">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+        >
+          <path fill="none" d="M0 0h24v24H0z" />
+          <path
+            d="M2 18h10v2H2v-2zm0-7h14v2H2v-2zm0-7h20v2H2V4zm17 11.17V9h5v2h-3v7a3 3 0 1 1-2-2.83z"
+          />
+        </svg>
+        <h3>Playlist</h3>
+      </div>
+  
+      <!-- audio list-->
+      <div class="audioList">
+        <div class="audioTrack" *ngFor="let audio of audiofiles$; let i = index" (click)="openFile(audio, i)" matRipple>
+          <span>{{i+1}}</span>
+          <span>{{audio.audioTitle}}</span>
+          <span>{{audio.speakerName}}</span>
+          <span>{{audio.duration}}</span>
+          <span class="modifyButton UNPUBLISH" *ngIf="audio.status == 'published'"> <button matRipple (click)="updateStatus(audio, 'new', $event)">UNPUBLISH</button> </span>
+          <span class="modifyButton PUBLISH" *ngIf="audio.status == 'new'"> <button matRipple (click)="updateStatus(audio, 'published', $event)">PUBLISH</button> </span>
+          <span  class="modifyButton DELETE"> <button matRipple (click)="deleteAudio(audio,$event)">DELETE</button> </span>
+        </div>
       </div>
     </div>
   </div>
+  
+  
+<div class="media-container">
+       <!-- footer for slider player-->
+      <!-- desktop-->
+      <div class="media-footer" *ngIf="!mobileQuery.matches">
+        <mat-toolbar class="footer">
+          <mat-toolbar-row
+            class="media-action-bar"
+            [ngClass]="{ playerBG: mobileQuery.matches }"
+          >
+            <mat-toolbar-row class="media-action-bar playerBG">
+              <!-- slider-->
+              <mat-toolbar-row>
+                0:20<mat-slider
+                  class="time-slider"
+                  min="0"
+                  [max]="0"
+                  step="1"
+                  [value]="0"
+                  (input)="onSliderChangeEnd($event)"
+                  [disabled]=""
+                ></mat-slider>
+                4:20
+              </mat-toolbar-row>
+
+              <button mat-button [disabled]="isFirstPlaying()" (click)="previous()">
+                <mat-icon mat-list-icon class="audioControl"
+                  >skip_previous</mat-icon
+                >
+              </button>
+
+              <button mat-button (click)="play()" [disabled]="state?.error" *ngIf="!state?.playing">
+                <mat-icon mat-list-icon>play_circle_filled</mat-icon>
+              </button>
+
+              <button mat-button (click)="pause()" *ngIf="state?.playing">
+                <mat-icon mat-list-icon>pause_circle_filled</mat-icon>
+              </button>
+
+              <button mat-button [disabled]="isLastPlaying()" (click)="next()">
+                <mat-icon mat-list-icon class="audioControl"
+                  >skip_next</mat-icon
+                >
+              </button>
+            </mat-toolbar-row>
+
+            <span
+              class="mypodlogo"
+              [ngClass]="{ mypodlogoMobile: mobileQuery.matches }"
+            >
+              mi-POD
+            </span>
+          </mat-toolbar-row>
+        </mat-toolbar>
+      </div>
+
+      <!-- mobile -->
+      <div class="media-footer" *ngIf="mobileQuery.matches">
+        <mat-toolbar class="footer">
+          <mat-toolbar-row class="media-action-bar playerBG">
+            <!-- slider-->
+            <mat-toolbar-row>
+              0:20
+              <mat-slider
+                class="time-slider"
+                min="0"
+                [max]="0"
+                step="1"
+                [value]="0"
+                (input)="onSliderChangeEnd($event)"
+                [disabled]=""
+              ></mat-slider>
+              4:20
+            </mat-toolbar-row>
+          </mat-toolbar-row>
+
+          <mat-toolbar-row class="media-action-bar playerBG">
+            <button mat-button>
+              <mat-icon mat-list-icon class="audioControl"
+                >skip_previous</mat-icon
+              >
+            </button>
+
+            <button mat-button>
+              <mat-icon mat-list-icon>play_circle_filled</mat-icon>
+            </button>
+
+            <button mat-button *ngIf="">
+              <mat-icon mat-list-icon>pause_circle_filled</mat-icon>
+            </button>
+
+            <button mat-button>
+              <mat-icon mat-list-icon class="audioControl">skip_next</mat-icon>
+            </button>
+          </mat-toolbar-row>
+        </mat-toolbar>
+      </div>
 </div>
-
-
