@@ -100,3 +100,390 @@ body {
 .mat-drawer-content {
   overflow-x: hidden;
 }
+
+
+$base-bgcolor: #22233c;
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  background-color: $base-bgcolor;
+
+  .uploadSlider {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    color: #fff;
+    font-family: Roboto;
+    font-size: 13px;
+    letter-spacing: 0.61px;
+    line-height: 15px;
+    margin: 10px;
+    margin-right: 90px;
+
+    .determinateSlider {
+      margin: 0 15px;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .uploadSlider {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 50%;
+      margin-right: 45px;
+    }
+  }
+}
+
+.example-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+  background-color: transparent;
+}
+
+.example-is-mobile .example-sidenav-container {
+  /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+       `<body>` to be our scrolling element for mobile layouts. */
+  flex: 1 0 auto;
+  background-color: transparent;
+  max-width: 100%;
+}
+
+.example-is-mobile .mat-sidenav {
+  max-width: 240px;
+  width: 100%;
+
+  .userDisplaName {
+    font-size: 17px !important;
+  }
+}
+
+.mat-sidenav {
+  background-color: $base-bgcolor;
+  width: 100%;
+  overflow: visible !important;
+  max-width: 260px;
+}
+
+.left-nav-container {
+  .authstatusParent {
+    height: 120px;
+    border-bottom: 2px solid #25273e;
+
+    .authstatus-container {
+      display: flex;
+      flex-direction: row;
+      align-content: center;
+      justify-content: flex-start;
+      padding-left: 10px;
+
+      .userDisplaName {
+        margin: auto;
+        margin-left: 20px;
+        color: #fff;
+        font-family: Roboto;
+        font-size: 20px;
+        line-height: 23px;
+
+        button {
+          box-sizing: border-box;
+          height: 24px;
+          opacity: 0.3;
+          border-radius: 6px;
+          border: 1px solid #fff;
+          background-color: transparent;
+          color: #fff;
+          margin-top: 8px;
+        }
+      }
+    }
+
+    .authstatus-icon {
+      display: block;
+      padding: 4px;
+      border: 2px solid #2164e7;
+      box-sizing: border-box;
+      border-radius: 100%;
+      height: 74px;
+      width: 74px;
+      opacity: 0.8;
+
+      svg {
+        max-width: 68px;
+        max-height: 68px;
+        height: 100%;
+        width: 100%;
+        fill: #2164e7;
+        display: block;
+      }
+    }
+  }
+
+  .menuLink {
+    opacity: 0.3;
+    color: #fff;
+    line-height: 23px;
+    letter-spacing: 0.1px;
+
+    svg {
+      fill: #fff;
+    }
+  }
+
+  .menuItem {
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-right: 20px;
+    }
+  }
+}
+
+.active.current {
+  border-right: 3px solid #fff;
+  color: #fff;
+  opacity: 1 !important;
+
+  svg {
+    fill: #fff;
+  }
+}
+
+.topnav {
+  top: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .mobileSearch {
+    max-width: 194px !important;
+  }
+
+  .searchWrap {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    opacity: 0.6;
+  }
+
+  .searchContainer {
+    font-family: Roboto;
+    font-size: 15px;
+    line-height: 25px;
+    width: 100%;
+    max-width: 256px;
+    color: #fff;
+    font-weight: 100;
+
+    input {
+      font-size: 20px;
+      color: #fff;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    input::placeholder,
+    input::-webkit-input-placeholder,
+    input:-ms-input-placeholder,
+    input:-moz-placeholder {
+      font-size: 15px;
+      color: #fff;
+    }
+
+    .mat-form-field-appearance-legacy .mat-form-field-label {
+      color: #fff !important;
+
+      span {
+        color: #fff !important;
+      }
+    }
+  }
+
+  .uploadBtn {
+    height: 50px;
+    width: 140px;
+    border-radius: 6px;
+    background-color: rgba(33, 100, 231, 0.5);
+    border: none;
+    color: #fff;
+    font-family: Roboto;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    line-height: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .uploadBtnMobile {
+    font-size: 15px;
+    height: 40px;
+    width: 110px;
+  }
+}
+
+.burgerMenu {
+  background-color: transparent;
+  border: none;
+  fill: #fff;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0px;
+  height: 100%;
+}
+
+.burgerMenu:focus {
+  outline: none;
+}
+
+.mat-sidenav-content {
+  margin: 30px;
+  //   background-image: url(/myPOD-Dashboard/src/assets/bg.svg);
+}
+
+.contentArea {
+  margin-left: 300px !important;
+  margin-right: 75px;
+  background-color: transparent;
+}
+
+.sliderPlayer {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+
+  display: none;
+
+  .playerDetails {
+    height: 74px;
+    width: 80%;
+    background-color: #1f2136;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    padding-left: 30px;
+    padding-right: 30px;
+
+    .mediaButtonContainer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .mediaButtonContainer mat-icon {
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .mediaButtonContainer .pause_play {
+    font-size: 40px;
+  }
+}
+
+.mypodlogo {
+  height: 35px;
+  color: #fff;
+  font-family: Roboto;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 35px;
+  text-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  margin-left: 30px;
+}
+
+.mypodlogoMobile {
+  display: none;
+}
+
+.matSliderContainer {
+  max-width: 70%;
+  width: 100%;
+  display: block;
+
+  mat-slider {
+    width: 100%;
+    max-width: 90%;
+    color: #fff;
+    background-color: #fff;
+  }
+}
+
+.playerBG {
+  background-color: #1f2136 !important;
+}
+
+.media-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 50px;
+  background-color: transparent !important;
+  background: transparent !important;
+  color: #fff !important;
+
+  .time-slider {
+    width: 100% !important;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .media-action-bar {
+    width: 100%;
+    padding: 2.5rem;
+    justify-content: center;
+
+    button:disabled .mat-icon {
+      color: #7b7b7b;
+    }
+
+    .mat-icon {
+      height: 48px;
+      width: 48px;
+      font-size: 48px;
+      color: #fff;
+    }
+
+    .audioControl {
+      height: 24px !important;
+      width: 24px !important;
+      font-size: 24px !important;
+      color: #fff;
+    }
+  }
+}
+
+.audioDetailsMobile {
+  display: none;
+}
+
+
+@media (max-width:375px){
+  .media-footer {
+    margin-bottom: 0px;
+  }
+}

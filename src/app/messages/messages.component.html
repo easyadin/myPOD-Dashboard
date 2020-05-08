@@ -93,36 +93,36 @@
           <mat-toolbar-row class="media-action-bar playerBG">
             <!-- slider-->
             <mat-toolbar-row>
-              0:20
+              {{ state?.readableCurrentTime }}
               <mat-slider
                 class="time-slider"
                 min="0"
-                [max]="0"
+                [max]="state?.duration"
                 step="1"
-                [value]="0"
+                [value]="state?.currentTime"
                 (input)="onSliderChangeEnd($event)"
-                [disabled]=""
+                [disabled]="state?.error || currentFile.index === undefined"
               ></mat-slider>
-              4:20
+              {{ state?.readableDuration }}
             </mat-toolbar-row>
           </mat-toolbar-row>
 
           <mat-toolbar-row class="media-action-bar playerBG">
-            <button mat-button>
+            <button mat-button [disabled]="isFirstPlaying()" (click)="previous()">
               <mat-icon mat-list-icon class="audioControl"
                 >skip_previous</mat-icon
               >
             </button>
 
-            <button mat-button>
+            <button mat-button (click)="play()" [disabled]="state?.error" *ngIf="!state?.playing">
               <mat-icon mat-list-icon>play_circle_filled</mat-icon>
             </button>
 
-            <button mat-button *ngIf="">
+            <button mat-button (click)="pause()" *ngIf="state?.playing">
               <mat-icon mat-list-icon>pause_circle_filled</mat-icon>
             </button>
 
-            <button mat-button>
+            <button mat-button [disabled]="isLastPlaying()" (click)="next()">
               <mat-icon mat-list-icon class="audioControl">skip_next</mat-icon>
             </button>
           </mat-toolbar-row>

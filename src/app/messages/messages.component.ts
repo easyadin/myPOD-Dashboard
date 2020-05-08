@@ -96,7 +96,7 @@ export class MessagesComponent implements OnInit {
   }
 
 
-  // Stream audio ----------------
+  // Stream audio 
 
   playStream(url) {
     this.audioService.playStream(url).subscribe((events) => {
