@@ -1,3 +1,4 @@
+import { duration } from 'moment';
 import { CloudService } from './services/cloud.service';
 import { AudioModel } from './interfaces/audio.model';
 import { Observable } from 'rxjs/Observable';
@@ -22,8 +23,8 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { NumberSymbol } from '@angular/common';
-
+import { StreamState } from './interfaces/stream-state';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +32,9 @@ import { NumberSymbol } from '@angular/common';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  state: StreamState;
+  currentFile: any = {};
+
   hideRequiredControl = new FormControl(false);
   floatLabelControl = new FormControl('auto');
 
@@ -40,6 +44,7 @@ export class AppComponent {
   audioUrl: string;
   status: string;
   event: any;
+  duration: any;
 
   title = 'myPOD-Dashboard';
   @ViewChild('sidenav') sidenav: MatSidenav;
@@ -81,6 +86,8 @@ export class AppComponent {
     this.audioTitle = audioFile.target.files[0].name;
     this.speakerName = 'Toye Fakunle';
     this.status = 'new';
+
+    //open dialog
     this.openDialog(audioFile);
   }
 
@@ -94,6 +101,7 @@ export class AppComponent {
         audioUrl: this.audioUrl,
         status: this.status,
         event: audioFile,
+        duration: this.duration,
       },
     });
 
@@ -131,14 +139,18 @@ export class UploadDialog {
     @Inject(MAT_DIALOG_DATA) public data: AudioModel
   ) {}
 
-  cancelDialog(): void {
+  cancelDialog() {
     this.dialogRef.close();
     this.isSaving = false;
     this.isUploading = false;
     this.uploadComplete = false;
   }
-
+  cancelUploadTask() {
+    this.task.cancel();
+    this.cancelDialog();
+  }
   uploadAudio() {
+    this.data.duration = this.data.event.duration;
     this.isSaving = true;
     const id = Math.random().toString(36).substring(2);
     this.ref = this.afStorage.ref(id);
@@ -169,6 +181,26 @@ export class UploadDialog {
       .subscribe();
   }
 
+  // get audio metadata
+  getMeta(event, audioDuration) {
+    //load metadata to get duration
+    let duration_: any;
+    var audioMeta = document.createElement('audio');
+    audioMeta.preload = 'metadata';
+
+    audioMeta.src = URL.createObjectURL(event.target.files[0]);
+    audioMeta.onloadedmetadata = function () {
+      window.URL.revokeObjectURL(audioMeta.src);
+      duration_ = audioMeta.duration;
+      event.duration = duration_;
+      audioDuration = event.duration;
+
+      return audioDuration;
+    };
+
+    return audioDuration;
+  }
+
   addToAPI(id: string) {
     this.postAudio = new AudioModel();
     this.postAudio.album = this.data.album || '';
@@ -178,10 +210,22 @@ export class UploadDialog {
     this.postAudio.status = this.data.status;
     this.postAudio.event = '';
     this.postAudio.id = id;
+    this.postAudio.duration = this.data.duration;
+    this.postAudio.duration = this.formatTime(this.postAudio.duration)
     this.cloudService.addAudio(this.postAudio).subscribe((res) => {
       // refresh
-      window.location.reload()
+      window.location.reload();
     });
-    
+  }
+
+  //format duration
+  formatTime(time: number, format: string = 'mm:ss') {
+    const momentTime = time * 1000;
+    return moment.utc(momentTime).format(format);
+  }
+
+  ngOnInit() {
+    // get meta data
+    this.getMeta(this.data.event, this.data.duration);
   }
 }

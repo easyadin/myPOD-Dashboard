@@ -11,25 +11,21 @@ import { publish } from 'rxjs/operators';
 })
 export class DashboardComponent implements OnInit {
   audiofiles$: AudioModel[];
-  published$ : AudioModel[];
+  published$: AudioModel[];
   pending$;
 
-  TotalMessages;
+  TotalMessages = 0;
   published = 0;
   pending = 0;
 
-
-  constructor(public cloudService: CloudService) {}
-
-  ngOnInit() {
-    // get media files
-    return this.cloudService.getAudioFiles().subscribe(
+  constructor(public cloudService: CloudService) {
+    this.cloudService.getAudioFiles().subscribe(
       (data) => {
         this.audiofiles$ = data;
         this.TotalMessages = this.audiofiles$.length;
 
         //get puiblished audio count
-        this.getCounters()
+        this.getCounters();
       },
       (error) => {
         console.log('erroe occured: ', error);
@@ -37,10 +33,14 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  getCounters(){
-     this.published$ = this.audiofiles$.filter(audio => audio.status === 'published');
-        this.published = this.published$.length
-     this.pending$ = this.audiofiles$.filter(audio => audio.status === 'new');
-        this.pending = this.pending$.length
+  ngOnInit() {}
+
+  getCounters() {
+    this.published$ = this.audiofiles$.filter(
+      (audio) => audio.status === 'published'
+    );
+    this.published = this.published$.length;
+    this.pending$ = this.audiofiles$.filter((audio) => audio.status === 'new');
+    this.pending = this.pending$.length;
   }
 }

@@ -6,6 +6,7 @@ export class AudioModel {
   audioUrl: string;
   status: string;
   event: any;
+  duration: any;
 }
 
 

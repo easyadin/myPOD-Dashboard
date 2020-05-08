@@ -26,7 +26,7 @@
     <button mat-raised-button color="primary" (click)="uploadAudio()">
       Save
     </button>
-    <button mat-stroked-button (click)="task.cancel(); cancelDialog()">Cancel</button>
+    <button mat-stroked-button (click)="cancelDialog()">Cancel</button>
   </div>
 </div>
 
@@ -44,6 +44,10 @@
     <div class="modifyProgress" *ngIf="uploadProgress | async as pct">
       {{pct | number}}%
        <!-- &#183; 8 seconds left -->
+    </div>
+
+    <div class="cancelUpload">
+      <button (click) ="cancelUploadTask()">Cancel</button>
     </div>
   </div>
 

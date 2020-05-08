@@ -3,7 +3,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CloudService } from '../services/cloud.service';
 import { Observable, throwError } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { StreamState } from '../interfaces/stream-state';
+import { AudioService } from '../services/audio.service';
 
 @Component({
   selector: 'app-messages',
@@ -13,18 +15,26 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class MessagesComponent implements OnInit {
   audiofiles$: AudioModel[];
   audioStatus;
-
   postAudio: AudioModel;
 
+  state: StreamState;
+  currentFile: any = {};
+
   constructor(
+    public audioService: AudioService,
     private _snackBar: MatSnackBar,
     public cloudService: CloudService,
     private storage: AngularFireStorage
-  ) {}
+  ) {
+    // listen to stream state
+    this.audioService.getState().subscribe((state) => {
+      this.state = state;
+    });
+  }
 
   ngOnInit() {
     // get media files
-    return this.cloudService.getAudioFiles().subscribe(
+    this.cloudService.getAudioFiles().subscribe(
       (data) => {
         this.audiofiles$ = data;
       },
@@ -41,25 +51,57 @@ export class MessagesComponent implements OnInit {
   }
 
   // delete audio
-  deleteAudio(audioURL, id) {
-    this.cloudService.deleteAudio(id).subscribe((res) => {
-      this.storage.storage.refFromURL(audioURL).delete(),
-        // refresh
-        this.openSnackBar(`Audio deleted`, 'close')
-        window.location.reload();
+  deleteAudio(audio, event) {
+    event.stopPropagation();
+    this.cloudService.deleteAudio(audio.id).subscribe((res) => {
+      this.storage.storage
+        .refFromURL(audio.audioUrl)
+        .delete()
+        .then((res) => {
+          this.openSnackBar(`Audio deleted`, 'close');
+          // refresh
+          this.ngOnInit();
+        });
     });
   }
 
   // update audio status
-  updateStatus(audioFile, status) {
+  updateStatus(audioFile, status, event) {
+    event.stopPropagation();
     audioFile.status = status;
     audioFile.event = '';
-
     this.postAudio = new AudioModel();
     this.postAudio = audioFile;
     this.cloudService.updateAudio(this.postAudio).subscribe((res) => {
-      this.audioStatus = status == 'new'? 'unpublished' : status
-      this.openSnackBar(`Audio ${this.audioStatus}`, 'close')
+      this.audioStatus = status == 'new' ? 'unpublished' : status;
+      this.openSnackBar(`Audio ${this.audioStatus}`, 'close');
     });
+  }
+
+  // Stream audio ----------------
+
+  playStream(url) {
+    this.audioService.playStream(url).subscribe((events) => {
+      // listening for fun here
+    });
+  }
+
+  openFile(file, index) {
+    this.currentFile = { index, file };
+    this.audioService.stop();
+    this.playStream(file.audioUrl);
+  }
+  play() {
+    this.audioService.play();
+  }
+  stop() {
+    this.audioService.stop();
+  }
+  isFirstPlaying() {
+    return this.currentFile.index === 0;
+  }
+
+  isLastPlaying() {
+    return this.currentFile.index === this.audiofiles$.length - 1;
   }
 }
