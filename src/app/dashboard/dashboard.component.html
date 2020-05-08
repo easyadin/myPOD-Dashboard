@@ -40,12 +40,111 @@
     </div>
     <!-- audio list-->
     <div class="audioList">
-      <div class="audioTrack" *ngFor="let audio of audiofiles$; let i = index" matRipple>
+      <div class="audioTrack" *ngFor="let audio of audiofiles$; let i = index" matRipple (click)="openFile(audio,i)">
         <span>{{i+1}}</span>
         <span>{{audio.audioTitle}}</span>
         <span>{{audio.speakerName}}</span>
-        <span>5:20</span>
+        <span>{{audio.duration}}</span>
       </div>
     </div>
   </div>
+</div>
+
+
+<div class="mediaSLider-container">
+  <!-- footer for slider player-->
+ <!-- desktop-->
+ <div class="media-footer" *ngIf="!mobileQuery.matches">
+   <mat-toolbar class="footer">
+     <mat-toolbar-row
+       class="media-action-bar"
+       [ngClass]="{ playerBG: mobileQuery.matches }"
+     >
+       <mat-toolbar-row class="media-action-bar playerBG">
+         <!-- slider-->
+         <mat-toolbar-row>
+           {{ state?.readableCurrentTime }}<mat-slider
+             class="time-slider"
+             min="0"
+             [max]="state?.duration"
+             step="1"
+             [value]="state?.currentTime"
+             (input)="onSliderChangeEnd($event)"
+             [disabled]="state?.error || currentFile.index === undefined"
+           ></mat-slider>
+           {{ state?.readableDuration }}
+         </mat-toolbar-row>
+
+         <button mat-button [disabled]="isFirstPlaying()" (click)="previous()">
+           <mat-icon mat-list-icon class="audioControl"
+             >skip_previous</mat-icon
+           >
+         </button>
+
+         <button mat-button (click)="play()" [disabled]="state?.error" *ngIf="!state?.playing">
+           <mat-icon mat-list-icon>play_circle_filled</mat-icon>
+         </button>
+
+         <button mat-button (click)="pause()" *ngIf="state?.playing">
+           <mat-icon mat-list-icon>pause_circle_filled</mat-icon>
+         </button>
+
+         <button mat-button [disabled]="isLastPlaying()" (click)="next()">
+           <mat-icon mat-list-icon class="audioControl"
+             >skip_next</mat-icon
+           >
+         </button>
+       </mat-toolbar-row>
+
+       <span
+         class="mypodlogo"
+         [ngClass]="{ mypodlogoMobile: mobileQuery.matches }"
+       >
+         mi-POD
+       </span>
+     </mat-toolbar-row>
+   </mat-toolbar>
+ </div>
+
+ <!-- mobile -->
+ <div class="media-footer" *ngIf="mobileQuery.matches">
+   <mat-toolbar class="footer">
+     <mat-toolbar-row class="media-action-bar playerBG">
+       <!-- slider-->
+       <mat-toolbar-row>
+         0:20
+         <mat-slider
+           class="time-slider"
+           min="0"
+           [max]="0"
+           step="1"
+           [value]="0"
+           (input)="onSliderChangeEnd($event)"
+           [disabled]=""
+         ></mat-slider>
+         4:20
+       </mat-toolbar-row>
+     </mat-toolbar-row>
+
+     <mat-toolbar-row class="media-action-bar playerBG">
+       <button mat-button>
+         <mat-icon mat-list-icon class="audioControl"
+           >skip_previous</mat-icon
+         >
+       </button>
+
+       <button mat-button>
+         <mat-icon mat-list-icon>play_circle_filled</mat-icon>
+       </button>
+
+       <button mat-button *ngIf="">
+         <mat-icon mat-list-icon>pause_circle_filled</mat-icon>
+       </button>
+
+       <button mat-button>
+         <mat-icon mat-list-icon class="audioControl">skip_next</mat-icon>
+       </button>
+     </mat-toolbar-row>
+   </mat-toolbar>
+ </div>
 </div>
