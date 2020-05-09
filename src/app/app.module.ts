@@ -21,8 +21,10 @@ import { GenreComponent } from './genre/genre.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { MaterialModule } from './material.module';
 import { PlayerComponent,renderMessageList} from './pages/player/player.component';
-
-
+import { LoginComponent } from './login/login.component';
+import { EmailComponent } from './email/email.component';
+import { SignupComponent } from './signup/signup.component';
+import { MembersComponent } from './members/members.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,11 @@ import { PlayerComponent,renderMessageList} from './pages/player/player.componen
     GenreComponent,
     NotFoundComponent,
     PlayerComponent,
-    renderMessageList
+    renderMessageList,
+    LoginComponent,
+    EmailComponent,
+    SignupComponent,
+    MembersComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +62,7 @@ import { PlayerComponent,renderMessageList} from './pages/player/player.componen
       { path: 'albums', component: AlbumsComponent },
       { path: 'speakers', component: SpeakersComponent },
       { path: 'genre', component: GenreComponent },
+      { path: 'login', component: LoginComponent },
       { path: '**', component: NotFoundComponent } //not found
     ]),
     MaterialModule

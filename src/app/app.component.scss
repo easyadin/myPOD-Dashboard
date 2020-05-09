@@ -86,6 +86,14 @@ $base-bgcolor: #22233c;
       justify-content: flex-start;
       padding-left: 10px;
 
+      img {
+        max-width: 68px;
+        max-height: 68px;
+        height: 100%;
+        width: 100%;
+        display: block;
+        border-radius: 100%;
+      }
       .userDisplaName {
         margin: auto;
         margin-left: 20px;
@@ -110,7 +118,7 @@ $base-bgcolor: #22233c;
     .authstatus-icon {
       display: block;
       padding: 4px;
-      border: 2px solid #2164e7;
+      border: 1px solid #eee;
       box-sizing: border-box;
       border-radius: 100%;
       height: 74px;
@@ -344,18 +352,103 @@ $base-bgcolor: #22233c;
     color: #7b7b7b;
     cursor: pointer;
   }
-  .mat-icon:nth-child(2){
+  .mat-icon:nth-child(2) {
     margin-right: 0px;
   }
 }
 
-
-@media (max-width:375px){
+@media (max-width: 375px) {
   .mat-sidenav-content {
-    margin: 0px;
+    margin: 15px;
   }
 
   .media-footer {
     margin-bottom: 0px;
+  }
+}
+
+.mainAccessContainer {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+
+  @media (max-width: 425px) {
+
+    .mi-pod {
+      font-size: 40px!important;
+    }
+  }
+
+  @media (min-width: 800px) {
+    .accessCSS {
+      width: 35%;
+    }
+  }
+}
+
+.rights {
+  display: none;
+}
+
+button:focus {
+outline: none;
+}
+
+.accessCSS {
+  height: 55vh;
+  width: 75%;
+  margin: auto;
+  text-align: center;
+  overflow: hidden !important;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 2px 5px 0 #ececff;
+
+  .AccesContainer {
+    margin: 20px;
+  }
+  .mi-pod {
+    color: #22233c;
+    font-family: Roboto;
+    font-size: 80px;
+    font-weight: 700;
+  }
+
+  .signInoptions {
+    .SignInbutton {
+      background-color: rgb(60, 121, 230);
+      border-radius: 500px;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #fff;
+      font-family: Roboto;
+      font-weight: 500;
+      padding: 5px;
+
+      .GIcon {
+        display: block;
+        height: 25px;
+        width: 25px;
+        background-color: #fff;
+        border-radius: 100%;
+        padding: 10px;
+
+        svg {
+          object-fit: contain;
+          height: 100%;
+          width: 100%;
+        }
+      }
+      .Gtext {
+        margin: 10px;
+        font-size: 15px;
+        font-weight: 500;
+      }
+    }
   }
 }

@@ -1,3 +1,4 @@
+import { AuthService } from './services/auth.service';
 import { MessagesComponent } from './messages/messages.component';
 import { duration } from 'moment';
 import { CloudService } from './services/cloud.service';
@@ -55,6 +56,7 @@ export class AppComponent {
   uploading = false; // temp
 
   constructor(
+    public auth: AuthService,
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     public dialog: MatDialog
